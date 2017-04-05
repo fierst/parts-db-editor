@@ -51,6 +51,12 @@
    <property name="dragDropMode">
     <enum>QAbstractItemView::DragDrop</enum>
    </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
+   </property>
+   <attribute name="verticalHeaderVisible">
+    <bool>false</bool>
+   </attribute>
   </widget>
   <widget class="QPushButton" name="btn_add">
    <property name="geometry">

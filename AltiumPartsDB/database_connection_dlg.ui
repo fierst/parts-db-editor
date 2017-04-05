@@ -134,27 +134,17 @@
     <string>Cancel</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="user">
+  <widget class="QPushButton" name="btn_test_db_connection">
    <property name="geometry">
     <rect>
-     <x>272</x>
-     <y>190</y>
-     <width>71</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lbl_user">
-   <property name="geometry">
-    <rect>
-     <x>276</x>
-     <y>170</y>
-     <width>41</width>
-     <height>20</height>
+     <x>360</x>
+     <y>30</y>
+     <width>75</width>
+     <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>User</string>
+    <string>Test</string>
    </property>
   </widget>
  </widget>

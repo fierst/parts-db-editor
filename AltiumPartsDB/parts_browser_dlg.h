@@ -2,6 +2,9 @@
 #define PARTS_BROWSER_DLG_H
 
 #include <QMainWindow>
+#include <QFile>                    // For file I/O
+#include <QXmlStreamReader>         // For reading the configuration file
+#include <QXmlStreamWriter>         // For writing the configuration file
 
 namespace Ui {
 class parts_browser_dlg;
@@ -31,6 +34,11 @@ private:
     void update_schlib_path(const QString& schlib_path);
     void update_pcblib_path(const QString& pcblib_path);
     void update_db_path(const QString& db_path);
+
+    // TODO: Path specification?
+    // For now, these will both just default to wherever-the-application-looks
+    void write_configuration_file();
+    void read_configuration_file();
 
     // Attempt to load the configuration file from the current directory
     // If it's not there, return false

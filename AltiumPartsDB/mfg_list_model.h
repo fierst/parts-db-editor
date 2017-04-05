@@ -7,7 +7,7 @@
 
 #include <map>                  // For the parameter map
 
-#define MAXIMUM_MFGS 14         // Maximum index for manufacturers (15 total)
+#define MAXIMUM_MFGS 15         // Maximum number of manufacturers (15 total)
 
 const int8_t uninitialized_mfg_index = -1;
 

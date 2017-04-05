@@ -2,6 +2,8 @@
 
 #include <QDebug>
 
+// TODO: Custom delegate for checkbox fields (no text, centered)
+
 mfg_list_model::mfg_list_model(QObject *parent)
 {
 

@@ -7,8 +7,14 @@
 
 class library_part
 {
+
 public:
+
+    // Constructor, for new parts
     library_part();
+
+    // Copy constructor, for editing existing parts
+    library_part(const library_part &);
 
     // Add a new parameter to the part_parameters map with key=param and value=value
     void add_parameter(QString param, QString value);

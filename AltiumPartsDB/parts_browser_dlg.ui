@@ -69,6 +69,19 @@
      <string>Delete Part...</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_edit_part">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>10</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Edit Part...</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

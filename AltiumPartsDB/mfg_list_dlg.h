@@ -36,8 +36,6 @@ private:
     // Slot for editing an existing manufacturer when the user changes it
     void edited_mfg(const manufacturer & edited_manufacturer);
 
-    void dbg_sec_moved(int logical_index, int old_visual, int new_visual);
-
     // The model to hold the manufacturer information, which populates the table view
     mfg_list_model *mfgs_list;
 

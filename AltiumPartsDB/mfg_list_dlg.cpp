@@ -15,16 +15,6 @@ mfg_list_dlg::mfg_list_dlg(QWidget *parent) :
     ui->tbl_mfg_list->setSelectionBehavior(QAbstractItemView::SelectRows);                          // Select whole rows
     ui->tbl_mfg_list->setSelectionMode(QAbstractItemView::SingleSelection);                         // Only allow a single row selection
     ui->tbl_mfg_list->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);      // Automatically resize columns
-
-    // Allow the user to reorder the rows. This is important because manufacturer order is explicit, from most to least preferred
-    ui->tbl_mfg_list->verticalHeader()->setSectionsMovable(true);
-    ui->tbl_mfg_list->verticalHeader()->setDragEnabled(true);
-    ui->tbl_mfg_list->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
-    ui->tbl_mfg_list->verticalHeader()->setDragDropMode(QAbstractItemView::InternalMove);
-    QHeaderView *vert_header = ui->tbl_mfg_list->verticalHeader();
-    connect(vert_header, &ui->tbl_mfg_list->verticalHeader()->sectionMoved, this, &mfg_list_dlg::dbg_sec_moved);
-    // Don't allow the user to resize the dialog because it would mess up the layout
-    this->setWindowFlags(this->windowFlags() | Qt::MSWindowsFixedSizeDialogHint);
 }
 
 mfg_list_dlg::~mfg_list_dlg()
@@ -41,13 +31,6 @@ void mfg_list_dlg::new_mfg(const manufacturer & new_manufacturer)
 void mfg_list_dlg::edited_mfg(const manufacturer & edited_manufacturer)
 {
     mfgs_list->edit_manufacturer(edited_manufacturer);
-}
-
-void mfg_list_dlg::dbg_sec_moved(int logical_index, int old_visual, int new_visual)
-{
-    qDebug() << "logical index: " << logical_index;
-    qDebug() << "old visual index: " << old_visual;
-    qDebug() << "new visual index: " << new_visual;
 }
 
 void mfg_list_dlg::on_btn_add_clicked()
@@ -97,5 +80,4 @@ void mfg_list_dlg::on_btn_delete_clicked()
 void mfg_list_dlg::on_btn_ok_clicked()
 {
     int num_rows = ui->tbl_mfg_list->model()->rowCount();
-
 }
