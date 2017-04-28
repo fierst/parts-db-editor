@@ -3,6 +3,12 @@
 
 #include <QDialog>
 #include <QFileDialog>
+#include <QStandardPaths>
+#include <QMessageBox>
+
+#include <QtSql>
+
+#include <valarray>
 
 namespace Ui {
 class database_connection_dlg;

@@ -136,6 +136,7 @@ void manufacturer_dlg::construct_and_save_mfg()
     }
 
     this->mfg.datasheet_link = ui->box_datasheet_link->text();
+    this->mfg.rohs_status = ui->cmb_rohs_status->currentText();
     this->mfg.rohs_link = ui->box_rohs_link->text();
     this->mfg.ce_link = ui->box_ce_link->text();
     this->mfg.ul_link = ui->box_ul_link->text();
@@ -152,6 +153,7 @@ void manufacturer_dlg::populate_ui_controls()
     ui->box_mfg_pn->setText(this->mfg.part_number);
     ui->box_notes->setText(this->mfg.notes);
     ui->box_datasheet_link->setText(this->mfg.datasheet_link);
+    ui->cmb_rohs_status->setCurrentIndex(ui->cmb_rohs_status->findText(this->mfg.rohs_status));
     ui->box_rohs_link->setText(this->mfg.rohs_link);
     ui->box_ce_link->setText(this->mfg.ce_link);
     ui->box_ul_link->setText(this->mfg.ul_link);

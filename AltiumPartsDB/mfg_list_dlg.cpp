@@ -17,6 +17,18 @@ mfg_list_dlg::mfg_list_dlg(QWidget *parent) :
     ui->tbl_mfg_list->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);      // Automatically resize columns
 }
 
+mfg_list_dlg::mfg_list_dlg(library_part &existing_part) : ui(new Ui::mfg_list_dlg)
+{
+    ui->setupUi(this);
+
+    mfgs_list = new mfg_list_model(existing_part);
+
+    ui->tbl_mfg_list->setModel(mfgs_list);
+    ui->tbl_mfg_list->setSelectionBehavior(QAbstractItemView::SelectRows);                          // Select whole rows
+    ui->tbl_mfg_list->setSelectionMode(QAbstractItemView::SingleSelection);                         // Only allow a single row selection
+    ui->tbl_mfg_list->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);      // Automatically resize columns
+}
+
 mfg_list_dlg::~mfg_list_dlg()
 {
     delete ui;
@@ -79,5 +91,14 @@ void mfg_list_dlg::on_btn_delete_clicked()
 
 void mfg_list_dlg::on_btn_ok_clicked()
 {
-    int num_rows = ui->tbl_mfg_list->model()->rowCount();
+    std::map<QString, QString> manufacturer_list;
+    mfgs_list->get_mfg_map(manufacturer_list);
+    emit(manufacturer_list_populated(manufacturer_list));
+    this->accept();
+}
+
+
+void mfg_list_dlg::on_btn_cancel_clicked()
+{
+    this->reject();
 }

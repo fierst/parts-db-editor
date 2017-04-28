@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>capacitor_page</class>
- <widget class="QDialog" name="capacitor_page">
+ <class>capacitor_dlg</class>
+ <widget class="QDialog" name="capacitor_dlg">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>126</height>
+    <width>372</width>
+    <height>165</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Capacitor Properties</string>
   </property>
   <widget class="QLabel" name="lbl_capacitance">
    <property name="geometry">
@@ -84,6 +84,26 @@
      <height>21</height>
     </rect>
    </property>
+   <item>
+    <property name="text">
+     <string>mF</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>μF</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>nF</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>pF</string>
+    </property>
+   </item>
   </widget>
   <widget class="QLineEdit" name="box_tolerance">
    <property name="geometry">
@@ -115,7 +135,42 @@
     </rect>
    </property>
   </widget>
+  <widget class="QPushButton" name="btn_cancel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_OK">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>130</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
  </widget>
+ <tabstops>
+  <tabstop>box_capacitance</tabstop>
+  <tabstop>cmb_units</tabstop>
+  <tabstop>box_tolerance</tabstop>
+  <tabstop>box_voltage</tabstop>
+  <tabstop>box_tempco</tabstop>
+  <tabstop>btn_OK</tabstop>
+  <tabstop>btn_cancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

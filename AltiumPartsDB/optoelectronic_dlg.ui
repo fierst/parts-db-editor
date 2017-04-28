@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>optoelectronic_dlg</class>
+ <widget class="QDialog" name="optoelectronic_dlg">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,21 +11,8 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Optoelectronic Properties</string>
   </property>
-  <widget class="QPushButton" name="btn_next">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>190</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Next &gt;</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="lbl_current_rating">
    <property name="geometry">
     <rect>
@@ -37,19 +24,6 @@
    </property>
    <property name="text">
     <string>Current Rating</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_back">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>190</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&lt; Back</string>
    </property>
   </widget>
   <widget class="QLabel" name="lbl_brightness">
@@ -96,19 +70,6 @@
    </property>
    <property name="text">
     <string>Color</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_cancel">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>190</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cancel</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="box_voltage_fwd">
@@ -190,7 +151,43 @@
     </rect>
    </property>
   </widget>
+  <widget class="QPushButton" name="btn_OK">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>190</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_cancel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>190</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
  </widget>
+ <tabstops>
+  <tabstop>box_color</tabstop>
+  <tabstop>box_wavelength</tabstop>
+  <tabstop>box_power_dissipation</tabstop>
+  <tabstop>box_voltage_fwd</tabstop>
+  <tabstop>box_current_rating</tabstop>
+  <tabstop>box_millicandela_rating</tabstop>
+  <tabstop>btn_OK</tabstop>
+  <tabstop>btn_cancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

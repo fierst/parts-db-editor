@@ -7,6 +7,8 @@
 
 #include <map>                  // For the parameter map
 
+#include "library_part.h"
+
 #define MAXIMUM_MFGS 15         // Maximum number of manufacturers (15 total)
 
 const int8_t uninitialized_mfg_index = -1;
@@ -23,6 +25,7 @@ enum MfgListColumns
     MFG_DATE_INACTIVATED,
     MFG_INACTIVATED_BY,
     MFG_DATASHEET_LINK,
+    MFG_ROHS_STATUS,
     MFG_ROHS_LINK,
     MFG_CE_LINK,
     MFG_UL_LINK,
@@ -49,6 +52,7 @@ public:
     QString added_by;           // who added the part
     QString inactivated_by;     // who inactivated the part
     QString datasheet_link;     // link to the datasheet
+    QString rohs_status;        // Whether or not the part is RoHS compliant (Yes, No, Unknown, and Missing)
     QString rohs_link;          // link to the RoHS compliance info
     QString ce_link;            // link to the CE conformance info
     QString ul_link;            // link to the UL conformance info
@@ -67,13 +71,19 @@ public:
 
     // Default constructor, doesn't really do much...
     mfg_list_model(QObject *parent = 0);
-    \
+
+    // Constructor for existing parts
+    mfg_list_model(library_part &existing_part);
+
     // Basic methods to maintain the manufacturers list
     void add_manufacturer(const manufacturer & mfg_to_add);
     bool remove_manufacturer(int at_what_index);
     void edit_manufacturer(const manufacturer &mfg_to_edit);
 
     manufacturer get_mfg_at_index(int index);
+
+    // Get the manufacturers map (of parameters) and return the number of manufacturers serialized
+    int get_mfg_map(std::map<QString, QString> &);
 
     int available_mfg_slots();
 
@@ -93,8 +103,12 @@ private:
     // Vector of manufacturers to populate the model
     QList<manufacturer> mfg_list;
 
+    void serialize_manufacturer(const manufacturer &to_serialize);
+
     // Maintain this because it's going to be passed to the parent window
     std::map<QString, QString> mfg_map;
+
+    void push_param_to_map(QString key, QString value);
 };
 
 #endif // MFG_LIST_MODEL_H

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>electromechanical_dlg</class>
+ <widget class="QDialog" name="electromechanical_dlg">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Electromechanical Properties</string>
   </property>
   <widget class="QLineEdit" name="box_voltage_input">
    <property name="geometry">
@@ -335,33 +335,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_next">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>380</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Next &gt;</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="btn_cancel">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>380</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cancel</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_back">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -371,10 +345,41 @@
     </rect>
    </property>
    <property name="text">
-    <string>&lt; Back</string>
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_OK">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>380</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>box_electromechanical_type</tabstop>
+  <tabstop>box_current_rating</tabstop>
+  <tabstop>box_voltage_rating</tabstop>
+  <tabstop>box_on_resistance</tabstop>
+  <tabstop>box_voltage_input</tabstop>
+  <tabstop>box_load_voltage</tabstop>
+  <tabstop>box_circuit</tabstop>
+  <tabstop>box_coil_type</tabstop>
+  <tabstop>box_coil_current</tabstop>
+  <tabstop>box_coil_voltage</tabstop>
+  <tabstop>box_voltage_on</tabstop>
+  <tabstop>box_voltage_off</tabstop>
+  <tabstop>box_operating_time</tabstop>
+  <tabstop>box_release_time</tabstop>
+  <tabstop>btn_OK</tabstop>
+  <tabstop>btn_cancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

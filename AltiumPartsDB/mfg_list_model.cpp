@@ -9,6 +9,35 @@ mfg_list_model::mfg_list_model(QObject *parent)
 
 }
 
+mfg_list_model::mfg_list_model(library_part &existing_part)
+{
+    manufacturer existing_mfg;
+
+    for(int i = 0; i < MAXIMUM_MFGS; i++)
+    {
+        int mfg_num = i + 1;  // manufacturers are 1-indexed, not 0-indexed
+        existing_mfg.mfg_index = i;
+        existing_mfg.name = existing_part.parameter_value(QString("mfg_%1").arg(mfg_num));
+        existing_mfg.part_number = existing_part.parameter_value(QString("mfg_%1_part_number").arg(mfg_num));
+        existing_mfg.preferred = QString::compare(existing_part.parameter_value(QString("mfg_%1_preferred").arg(mfg_num)), "1");
+        existing_mfg.date_added = existing_part.parameter_value(QString("mfg_%1_date_added").arg(mfg_num));
+        existing_mfg.added_by = existing_part.parameter_value(QString("mfg_%1_added_by").arg(mfg_num));
+        existing_mfg.date_inactivated = existing_part.parameter_value(QString("mfg_%1_date_inactivated").arg(mfg_num));
+        existing_mfg.inactivated_by = existing_part.parameter_value(QString("mfg_%1_inactivated_by").arg(mfg_num));
+        existing_mfg.notes = existing_part.parameter_value(QString("mfg_%1_notes").arg(mfg_num));
+        existing_mfg.datasheet_link = existing_part.parameter_value(QString("mfg_%1_datasheet").arg(mfg_num));
+        existing_mfg.rohs_status = existing_part.parameter_value(QString("mfg_%1_rohs_status").arg(mfg_num));
+        existing_mfg.rohs_link = existing_part.parameter_value(QString("mfg_%1_rohs_sheet").arg(mfg_num));
+        existing_mfg.ce_link = existing_part.parameter_value(QString("mfg_%1_ce_sheet").arg(mfg_num));
+        existing_mfg.ul_link = existing_part.parameter_value(QString("mfg_%1_ul_sheet").arg(mfg_num));
+
+        if(!existing_mfg.name.isEmpty())
+        {
+            add_manufacturer(existing_mfg);
+        }
+    }
+}
+
 void mfg_list_model::add_manufacturer(const manufacturer &mfg_to_add)
 {
     int current_row = this->rowCount();
@@ -37,6 +66,8 @@ void mfg_list_model::add_manufacturer(const manufacturer &mfg_to_add)
     this->setData(index, mfg_to_add.inactivated_by);
     index = this->index(current_row, MfgListColumns::MFG_DATASHEET_LINK);
     this->setData(index, mfg_to_add.datasheet_link);
+    index = this->index(current_row, MfgListColumns::MFG_ROHS_STATUS);
+    this->setData(index, mfg_to_add.rohs_status);
     index = this->index(current_row, MfgListColumns::MFG_ROHS_LINK);
     this->setData(index, mfg_to_add.rohs_link);
     index = this->index(current_row, MfgListColumns::MFG_CE_LINK);
@@ -56,9 +87,26 @@ manufacturer mfg_list_model::get_mfg_at_index(int index)
     return mfg_list.at(index);
 }
 
+int mfg_list_model::get_mfg_map(std::map<QString, QString> & mfg_params)
+{
+    // Clear the manufacturer map
+    mfg_map.clear();
+
+    int num_mfgs = mfg_list.size();
+
+    for(size_t i = 0; i < num_mfgs; i++)
+    {
+        serialize_manufacturer(mfg_list.at(i));
+    }
+
+    mfg_params = mfg_map;
+
+    return num_mfgs;
+}
+
 void mfg_list_model::edit_manufacturer(const manufacturer & mfg_to_edit)
 {
-    mfg_list.replace(mfg_to_edit.mfg_index, mfg_to_edit);
+    mfg_list.replace((mfg_to_edit.mfg_index - 1), mfg_to_edit);
 }
 
 bool mfg_list_model::remove_manufacturer(int at_what_index)
@@ -126,6 +174,10 @@ QVariant mfg_list_model::data(const QModelIndex &index, int role) const
         {
             return mfg_list.at(index.row()).datasheet_link;
         }
+        else if(index.column() == MFG_ROHS_STATUS)
+        {
+            return mfg_list.at(index.row()).rohs_status;
+        }
         else if(index.column() == MFG_ROHS_LINK)
         {
             return mfg_list.at(index.row()).rohs_link;
@@ -179,7 +231,7 @@ QVariant mfg_list_model::headerData(int section, Qt::Orientation orientation, in
             case (int)MfgListColumns::MFG_PREFERRED:
                 return tr("Preferred");
             case (int)MfgListColumns::MFG_STATUS:
-                return tr("Status");
+                return tr("Active");
             case (int)MfgListColumns::MFG_DATE_ADDED:
                 return tr("Date Added");
             case (int)MfgListColumns::MFG_ADDED_BY:
@@ -192,6 +244,8 @@ QVariant mfg_list_model::headerData(int section, Qt::Orientation orientation, in
                 return tr("Notes");
             case (int)MfgListColumns::MFG_DATASHEET_LINK:
                 return tr("Datasheet Link");
+            case (int)MfgListColumns::MFG_ROHS_STATUS:
+                return tr("RoHS Status");
             case (int)MfgListColumns::MFG_ROHS_LINK:
                 return tr("RoHS Conformance Link");
             case (int)MfgListColumns::MFG_CE_LINK:
@@ -228,6 +282,8 @@ bool mfg_list_model::setData(const QModelIndex &index, const QVariant &value, in
 
     manufacturer mfg = this->mfg_list.value(index.row());
 
+    mfg.mfg_index = index.row() + 1;    // Set the mfg_index (starting at 1) based on the row
+
     if(role == Qt::EditRole)
     {
         if(index.column() == MFG_NAME)
@@ -261,6 +317,10 @@ bool mfg_list_model::setData(const QModelIndex &index, const QVariant &value, in
         else if(index.column() == MFG_DATASHEET_LINK)
         {
             mfg.datasheet_link = value.toString();
+        }
+        else if(index.column() == MFG_ROHS_STATUS)
+        {
+            mfg.rohs_status = value.toString();
         }
         else if(index.column() == MFG_ROHS_LINK)
         {
@@ -333,6 +393,28 @@ bool mfg_list_model::removeRows(int row, int count, const QModelIndex &index)
     return true;
 }
 
+void mfg_list_model::serialize_manufacturer(const manufacturer &to_serialize)
+{
+    push_param_to_map(QString("mfg_%1").arg(to_serialize.mfg_index), to_serialize.name);
+    push_param_to_map(QString("mfg_%1_part_number").arg(to_serialize.mfg_index), to_serialize.part_number);
+    push_param_to_map(QString("mfg_%1_preferred").arg(to_serialize.mfg_index), to_serialize.preferred ? "true" : "false");
+    push_param_to_map(QString("mfg_%1_date_added").arg(to_serialize.mfg_index), to_serialize.date_added);
+    push_param_to_map(QString("mfg_%1_added_by").arg(to_serialize.mfg_index), to_serialize.added_by);
+    push_param_to_map(QString("mfg_%1_date_inactivated").arg(to_serialize.mfg_index), to_serialize.date_inactivated);
+    push_param_to_map(QString("mfg_%1_inactivated_by").arg(to_serialize.mfg_index), to_serialize.inactivated_by);
+    push_param_to_map(QString("mfg_%1_notes").arg(to_serialize.mfg_index), to_serialize.notes);
+    push_param_to_map(QString("mfg_%1_datasheet").arg(to_serialize.mfg_index), to_serialize.datasheet_link);
+    push_param_to_map(QString("mfg_%1_rohs_status").arg(to_serialize.mfg_index), to_serialize.rohs_status);
+    push_param_to_map(QString("mfg_%1_rohs_sheet").arg(to_serialize.mfg_index), to_serialize.rohs_link);
+    push_param_to_map(QString("mfg_%1_ce_sheet").arg(to_serialize.mfg_index), to_serialize.ce_link);
+    push_param_to_map(QString("mfg_%1_ul_sheet").arg(to_serialize.mfg_index), to_serialize.ul_link);
+}
+
+void mfg_list_model::push_param_to_map(QString key, QString value)
+{
+    mfg_map.insert(std::map<QString, QString>::value_type(key, value));
+}
+
 manufacturer::manufacturer()
 {
     // Empty constructor, these values are largely invalid
@@ -345,6 +427,7 @@ manufacturer::manufacturer()
     this->added_by = "";
     this->inactivated_by = "";
     this->datasheet_link = "";
+    this->rohs_status = "Unknown";
     this->rohs_link = "";
     this->ce_link = "" ;
     this->ul_link = "";
@@ -363,6 +446,7 @@ manufacturer::manufacturer(const manufacturer & to_copy)
     this->added_by = to_copy.added_by;
     this->inactivated_by = to_copy.inactivated_by;
     this->datasheet_link = to_copy.datasheet_link;
+    this->rohs_status = to_copy.rohs_status;
     this->rohs_link = to_copy.rohs_link;
     this->ce_link = to_copy.ce_link;
     this->ul_link = to_copy.ul_link;

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Connection Properties</string>
   </property>
   <widget class="QLineEdit" name="box_db_location">
    <property name="geometry">
@@ -148,6 +148,16 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>box_db_location</tabstop>
+  <tabstop>box_schlib_location</tabstop>
+  <tabstop>box_pcblib_location</tabstop>
+  <tabstop>btn_connect</tabstop>
+  <tabstop>btn_cancel</tabstop>
+  <tabstop>btn_test_db_connection</tabstop>
+  <tabstop>btn_browse_schlib</tabstop>
+  <tabstop>btn_browse_pcblib</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

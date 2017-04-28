@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>power_dlg</class>
+ <widget class="QDialog" name="power_dlg">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Power Properties</string>
   </property>
   <widget class="QLabel" name="lbl_vout_1">
    <property name="geometry">
@@ -266,7 +266,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_next">
+  <widget class="QPushButton" name="btn_OK">
    <property name="geometry">
     <rect>
      <x>220</x>
@@ -276,26 +276,13 @@
     </rect>
    </property>
    <property name="text">
-    <string>Next &gt;</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_back">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>320</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&lt; Back</string>
+    <string>OK</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_cancel">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>10</x>
      <y>320</y>
      <width>75</width>
      <height>23</height>
@@ -306,6 +293,21 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>box_power_type</tabstop>
+  <tabstop>box_num_outputs</tabstop>
+  <tabstop>box_vin_min</tabstop>
+  <tabstop>box_vin_max</tabstop>
+  <tabstop>box_vout_1</tabstop>
+  <tabstop>box_vout_2</tabstop>
+  <tabstop>box_vout_3</tabstop>
+  <tabstop>box_current_output</tabstop>
+  <tabstop>box_voltage_iso</tabstop>
+  <tabstop>box_power</tabstop>
+  <tabstop>box_efficiency</tabstop>
+  <tabstop>btn_OK</tabstop>
+  <tabstop>btn_cancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
