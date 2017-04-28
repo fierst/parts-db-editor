@@ -6,7 +6,7 @@ USE parts;
 
 /* Create table for each class of parts */
 CREATE TABLE IF NOT EXISTS Capacitor (
-  part_number INT AUTO_INCREMENT = 1000000 NOT NULL,
+  part_number INT NOT NULL AUTO_INCREMENT,
   description VARCHAR(255),
   capacitance VARCHAR(32),
   tolerance VARCHAR(32),
@@ -214,8 +214,10 @@ CREATE TABLE IF NOT EXISTS Capacitor (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Capacitor AUTO_INCREMENT=1000000;
+
 CREATE TABLE IF NOT EXISTS Connector (
-  part_number INT AUTO_INCREMENT = 2000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   number_of_positions VARCHAR(32),
   number_of_rows VARCHAR(32),
@@ -425,8 +427,10 @@ CREATE TABLE IF NOT EXISTS Connector (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Connector AUTO_INCREMENT=2000000;
+
 CREATE TABLE IF NOT EXISTS Diode (
-  part_number INT AUTO_INCREMENT = 3000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   type VARCHAR(32),
   current_reverse VARCHAR(32),
@@ -639,8 +643,10 @@ CREATE TABLE IF NOT EXISTS Diode (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Diode AUTO_INCREMENT=3000000;
+
 CREATE TABLE IF NOT EXISTS Electromechanical (
-  part_number INT AUTO_INCREMENT = 4000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   type VARCHAR(32),
   current_rating VARCHAR(32),
@@ -858,8 +864,10 @@ CREATE TABLE IF NOT EXISTS Electromechanical (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Electromechanical AUTO_INCREMENT=4000000;
+
 CREATE TABLE IF NOT EXISTS Filter (
-  part_number INT AUTO_INCREMENT = 5000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   filter_type VARCHAR(32),
   impedance VARCHAR(32),
@@ -1072,8 +1080,10 @@ CREATE TABLE IF NOT EXISTS Filter (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Filter AUTO_INCREMENT=5000000;
+
 CREATE TABLE IF NOT EXISTS Fuse (
-  part_number INT AUTO_INCREMENT = 6000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   fuse_type VARCHAR(32),
   current_rating VARCHAR(32),
@@ -1283,8 +1293,10 @@ CREATE TABLE IF NOT EXISTS Fuse (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Fuse AUTO_INCREMENT=6000000;
+
 CREATE TABLE IF NOT EXISTS IC (
-  part_number INT AUTO_INCREMENT = 7000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   operating_temperature VARCHAR(32),
   footprint_ref VARCHAR(32) NOT NULL,
@@ -1489,8 +1501,10 @@ CREATE TABLE IF NOT EXISTS IC (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE IC AUTO_INCREMENT=7000000;
+
 CREATE TABLE IF NOT EXISTS Inductor (
-  part_number INT AUTO_INCREMENT = 8000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   inductance VARCHAR(32),
   tolerance VARCHAR(32),
@@ -1700,8 +1714,10 @@ CREATE TABLE IF NOT EXISTS Inductor (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Inductor AUTO_INCREMENT=8000000;
+
 CREATE TABLE IF NOT EXISTS Mechanical (
-  part_number INT AUTO_INCREMENT = 9000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   mechanical_type VARCHAR(32),
   footprint_ref VARCHAR(32) NOT NULL,
@@ -1906,8 +1922,10 @@ CREATE TABLE IF NOT EXISTS Mechanical (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Mechanical AUTO_INCREMENT=9000000;
+
 CREATE TABLE IF NOT EXISTS Optoelectronic (
-  part_number INT AUTO_INCREMENT = 10000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   color VARCHAR(32),
   wavelength VARCHAR(32),
@@ -2117,8 +2135,10 @@ CREATE TABLE IF NOT EXISTS Optoelectronic (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Optoelectronic AUTO_INCREMENT=10000000;
+
 CREATE TABLE IF NOT EXISTS Oscillator (
-  part_number INT AUTO_INCREMENT = 11000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   frequency VARCHAR(32),
   tolerance VARCHAR(32),
@@ -2329,8 +2349,10 @@ CREATE TABLE IF NOT EXISTS Oscillator (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Oscillator AUTO_INCREMENT=11000000;
+
 CREATE TABLE IF NOT EXISTS Power (
-  part_number INT AUTO_INCREMENT = 12000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   type VARCHAR(32),
   voltage_input_min VARCHAR(32),
@@ -2545,8 +2567,10 @@ CREATE TABLE IF NOT EXISTS Power (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Power AUTO_INCREMENT=12000000;
+
 CREATE TABLE IF NOT EXISTS Resistor (
-  part_number INT AUTO_INCREMENT = 13000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   resistance VARCHAR(32) NOT NULL,
   tolerance VARCHAR(32),
@@ -2755,8 +2779,10 @@ CREATE TABLE IF NOT EXISTS Resistor (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Resistor AUTO_INCREMENT=13000000;
+
 CREATE TABLE IF NOT EXISTS Transformer (
-  part_number INT AUTO_INCREMENT = 14000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   transformer_type VARCHAR(32),
   voltage_primary VARCHAR(32),
@@ -2969,8 +2995,10 @@ CREATE TABLE IF NOT EXISTS Transformer (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Transformer AUTO_INCREMENT=14000000;
+
 CREATE TABLE IF NOT EXISTS Transistor (
-  part_number INT AUTO_INCREMENT = 15000000 NOT NULL,
+  part_number INT AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   transistor_type VARCHAR(32),
   power_max VARCHAR(32),
@@ -3186,9 +3214,12 @@ CREATE TABLE IF NOT EXISTS Transistor (
   PRIMARY KEY (part_number)
 );
 
+ALTER TABLE Transistor AUTO_INCREMENT=15000000;
+
 /* REQUIRES USER NAMED 'parts_db_editor', make sure this user exists */
 
 /* Grant proper privileges to the altium_db_editor user for each table */
+/* Do each table explicitly because it's not farfetched to think a user already has a db named 'parts' with other stuff in it...*/
 GRANT INSERT, SELECT, UPDATE ON parts.Capacitor TO 'parts_db_editor';
 GRANT INSERT, SELECT, UPDATE ON parts.Connector TO 'parts_db_editor';
 GRANT INSERT, SELECT, UPDATE ON parts.Diode TO 'parts_db_editor';
