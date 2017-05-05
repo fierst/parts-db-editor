@@ -6,7 +6,7 @@ USE parts;
 
 /* Create table for each class of parts */
 CREATE TABLE IF NOT EXISTS Capacitor (
-  part_number INT NOT NULL AUTO_INCREMENT,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   capacitance VARCHAR(32),
   tolerance VARCHAR(32),
@@ -214,10 +214,8 @@ CREATE TABLE IF NOT EXISTS Capacitor (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Capacitor AUTO_INCREMENT=1000000;
-
 CREATE TABLE IF NOT EXISTS Connector (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   number_of_positions VARCHAR(32),
   number_of_rows VARCHAR(32),
@@ -427,10 +425,8 @@ CREATE TABLE IF NOT EXISTS Connector (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Connector AUTO_INCREMENT=2000000;
-
 CREATE TABLE IF NOT EXISTS Diode (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   type VARCHAR(32),
   current_reverse VARCHAR(32),
@@ -643,10 +639,8 @@ CREATE TABLE IF NOT EXISTS Diode (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Diode AUTO_INCREMENT=3000000;
-
 CREATE TABLE IF NOT EXISTS Electromechanical (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   type VARCHAR(32),
   current_rating VARCHAR(32),
@@ -864,10 +858,8 @@ CREATE TABLE IF NOT EXISTS Electromechanical (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Electromechanical AUTO_INCREMENT=4000000;
-
 CREATE TABLE IF NOT EXISTS Filter (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   filter_type VARCHAR(32),
   impedance VARCHAR(32),
@@ -1080,10 +1072,8 @@ CREATE TABLE IF NOT EXISTS Filter (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Filter AUTO_INCREMENT=5000000;
-
 CREATE TABLE IF NOT EXISTS Fuse (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   fuse_type VARCHAR(32),
   current_rating VARCHAR(32),
@@ -1293,10 +1283,8 @@ CREATE TABLE IF NOT EXISTS Fuse (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Fuse AUTO_INCREMENT=6000000;
-
 CREATE TABLE IF NOT EXISTS IC (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   operating_temperature VARCHAR(32),
   footprint_ref VARCHAR(32) NOT NULL,
@@ -1501,10 +1489,8 @@ CREATE TABLE IF NOT EXISTS IC (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE IC AUTO_INCREMENT=7000000;
-
 CREATE TABLE IF NOT EXISTS Inductor (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   inductance VARCHAR(32),
   tolerance VARCHAR(32),
@@ -1714,10 +1700,8 @@ CREATE TABLE IF NOT EXISTS Inductor (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Inductor AUTO_INCREMENT=8000000;
-
 CREATE TABLE IF NOT EXISTS Mechanical (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   mechanical_type VARCHAR(32),
   footprint_ref VARCHAR(32) NOT NULL,
@@ -1922,10 +1906,8 @@ CREATE TABLE IF NOT EXISTS Mechanical (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Mechanical AUTO_INCREMENT=9000000;
-
 CREATE TABLE IF NOT EXISTS Optoelectronic (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   color VARCHAR(32),
   wavelength VARCHAR(32),
@@ -2135,10 +2117,8 @@ CREATE TABLE IF NOT EXISTS Optoelectronic (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Optoelectronic AUTO_INCREMENT=10000000;
-
 CREATE TABLE IF NOT EXISTS Oscillator (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   frequency VARCHAR(32),
   tolerance VARCHAR(32),
@@ -2349,10 +2329,8 @@ CREATE TABLE IF NOT EXISTS Oscillator (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Oscillator AUTO_INCREMENT=11000000;
-
 CREATE TABLE IF NOT EXISTS Power (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   type VARCHAR(32),
   voltage_input_min VARCHAR(32),
@@ -2567,10 +2545,8 @@ CREATE TABLE IF NOT EXISTS Power (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Power AUTO_INCREMENT=12000000;
-
 CREATE TABLE IF NOT EXISTS Resistor (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   resistance VARCHAR(32) NOT NULL,
   tolerance VARCHAR(32),
@@ -2779,10 +2755,8 @@ CREATE TABLE IF NOT EXISTS Resistor (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Resistor AUTO_INCREMENT=13000000;
-
 CREATE TABLE IF NOT EXISTS Transformer (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   transformer_type VARCHAR(32),
   voltage_primary VARCHAR(32),
@@ -2995,10 +2969,8 @@ CREATE TABLE IF NOT EXISTS Transformer (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Transformer AUTO_INCREMENT=14000000;
-
 CREATE TABLE IF NOT EXISTS Transistor (
-  part_number INT AUTO_INCREMENT NOT NULL,
+  part_number VARCHAR(12) NOT NULL,
   description VARCHAR(255),
   transistor_type VARCHAR(32),
   power_max VARCHAR(32),
@@ -3214,7 +3186,233 @@ CREATE TABLE IF NOT EXISTS Transistor (
   PRIMARY KEY (part_number)
 );
 
-ALTER TABLE Transistor AUTO_INCREMENT=15000000;
+/* Create a table for the primary key IDs and set them up to auto-increment with a prefix depending on part type  */
+/* Probably not the best practice, but it makes maintenance/searching a lot easier and we don't have a ton of     */
+/* concurrent usage so I don't predict it being a huge problem                                                    */
+CREATE TABLE IF NOT EXISTS Capacitor_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Capacitor_id
+BEFORE INSERT ON Capacitor
+FOR EACH ROW
+BEGIN
+  INSERT INTO Capacitor_id() VALUES();
+  SET NEW.part_number = CONCAT('CAP-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS Connector_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Connector_id
+BEFORE INSERT ON Connector
+FOR EACH ROW
+BEGIN
+  INSERT INTO Connector_id() VALUES();
+  SET NEW.part_number = CONCAT('CON-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS Diode_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Diode_id
+BEFORE INSERT ON Diode
+FOR EACH ROW
+BEGIN
+  INSERT INTO Diode_id() VALUES();
+  SET NEW.part_number = CONCAT('DIO-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS Electromechanical_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Electromechanical_id
+BEFORE INSERT ON Electromechanical
+FOR EACH ROW
+BEGIN
+  INSERT INTO Electromechanical_id() VALUES();
+  SET NEW.part_number = CONCAT('EMC-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS Filter_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Filter_id
+BEFORE INSERT ON Filter
+FOR EACH ROW
+BEGIN
+  INSERT INTO Filter_id() VALUES();
+  SET NEW.part_number = CONCAT('FIL-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS Fuse_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Fuse_id
+BEFORE INSERT ON Fuse
+FOR EACH ROW
+BEGIN
+  INSERT INTO Fuse_id() VALUES();
+  SET NEW.part_number = CONCAT('FUS-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS IC_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_IC_id
+BEFORE INSERT ON IC
+FOR EACH ROW
+BEGIN
+  INSERT INTO IC_id() VALUES();
+  SET NEW.part_number = CONCAT('IC-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS Inductor_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Inductor_id
+BEFORE INSERT ON Inductor
+FOR EACH ROW
+BEGIN
+  INSERT INTO Inductor_id() VALUES();
+  SET NEW.part_number = CONCAT('IND-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS Mechanical_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Mechanical_id
+BEFORE INSERT ON Mechanical
+FOR EACH ROW
+BEGIN
+  INSERT INTO Mechanical_id() VALUES();
+  SET NEW.part_number = CONCAT('MEC-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS Optoelectronic_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Optoelectronic_id
+BEFORE INSERT ON Optoelectronic
+FOR EACH ROW
+BEGIN
+  INSERT INTO Optoelectronic_id() VALUES();
+  SET NEW.part_number = CONCAT('OPT-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS Oscillator_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Oscillator_id
+BEFORE INSERT ON Oscillator
+FOR EACH ROW
+BEGIN
+  INSERT INTO Oscillator_id() VALUES();
+  SET NEW.part_number = CONCAT('OSC-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS Power_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Power_id
+BEFORE INSERT ON Power
+FOR EACH ROW
+BEGIN
+  INSERT INTO Power_id() VALUES();
+  SET NEW.part_number = CONCAT('POW-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS Resistor_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Resistor_id
+BEFORE INSERT ON Resistor
+FOR EACH ROW
+BEGIN
+  INSERT INTO Resistor_id() VALUES();
+  SET NEW.part_number = CONCAT('RES-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS Transformer_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Transformer_id
+BEFORE INSERT ON Transformer
+FOR EACH ROW
+BEGIN
+  INSERT INTO Transformer_id() VALUES();
+  SET NEW.part_number = CONCAT('XFR-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE IF NOT EXISTS Transistor_id 
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_bi_Transistor_id
+BEFORE INSERT ON Transistor
+FOR EACH ROW
+BEGIN
+  INSERT INTO Transistor_id() VALUES();
+  SET NEW.part_number = CONCAT('TRN-', LPAD(LAST_INSERT_ID(), 8, '0'));
+END$$
+DELIMITER ;
 
 /* REQUIRES USER NAMED 'parts_db_editor', make sure this user exists */
 
