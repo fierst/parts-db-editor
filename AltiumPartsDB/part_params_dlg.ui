@@ -144,19 +144,6 @@
     <string>Part Properties...</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_manufacturers">
-   <property name="geometry">
-    <rect>
-     <x>420</x>
-     <y>170</y>
-     <width>151</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Manufacturers...</string>
-   </property>
-  </widget>
   <widget class="QComboBox" name="cmb_symbol_lib">
    <property name="geometry">
     <rect>
@@ -214,7 +201,6 @@
   <tabstop>cmb_footprint</tabstop>
   <tabstop>txt_description</tabstop>
   <tabstop>btn_part_properties</tabstop>
-  <tabstop>btn_manufacturers</tabstop>
  </tabstops>
  <resources/>
  <connections/>

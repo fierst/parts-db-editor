@@ -19,13 +19,10 @@ LIBS += "-LC:\Users\ewilson\Desktop\Code\lib\boost\stage\lib" -llibboost_filesys
 QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += main.cpp\
-    manufacturer_dlg.cpp \
-    mfg_list_dlg.cpp \
     library_part.cpp \
     database_connection_dlg.cpp \
     parts_browser_dlg.cpp \
     part_params_dlg.cpp \
-    mfg_list_model.cpp \
     altium_lib.cpp \
     cfb_types.cpp \
     capacitor_dlg.cpp \
@@ -45,13 +42,10 @@ SOURCES += main.cpp\
     connector_dlg.cpp
 
 HEADERS  += \
-    manufacturer_dlg.h \
-    mfg_list_dlg.h \
     library_part.h \
     database_connection_dlg.h \
     parts_browser_dlg.h \
     part_params_dlg.h \
-    mfg_list_model.h \
     altium_lib.hpp \
     cfb_types.hpp \
     transistor_dlg.h \
@@ -68,12 +62,9 @@ HEADERS  += \
     electromechanical_dlg.h \
     diode_dlg.h \
     capacitor_dlg.h \
-    connector_dlg.h \
-    db_defines.h
+    connector_dlg.h
 
 FORMS    += \
-    manufacturer_dlg.ui \
-    mfg_list_dlg.ui \
     database_connection_dlg.ui \
     part_params_dlg.ui \
     parts_browser_dlg.ui \

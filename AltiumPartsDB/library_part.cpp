@@ -74,9 +74,9 @@ void library_part::append_params_to_map(const std::map<QString, QString> & param
     qDebug() << "test";
 }
 
-QList<QString> library_part::get_query_params(QString which_table)
+QStringList library_part::get_query_params(QString which_table, QSqlDatabase which_database)
 {
-    QList<QString> query_params;
+    /*QList<QString> query_params;
 
     // Always write the base parameters (description and footprint/symbol ref & path)
     query_params.append(db_base_params);
@@ -101,20 +101,23 @@ QList<QString> library_part::get_query_params(QString which_table)
         }
     }
 
-    for(int j = 0; j < db_mfg_params.count(); j++)
+    return query_params;*/
+
+    QStringList part_fields;
+
+    QSqlQuery column_query(QString("SELECT * FROM %1 LIMIT 0, 0").arg(which_table), which_database);
+
+    for(int i = 0; i < column_query.record().count(); i++)
     {
-        if(!parameter_value(db_mfg_params.at(j)).isEmpty())
-        {
-            query_params.append(db_mfg_params.at(j));
-        }
+        part_fields.append(column_query.record().fieldName(i));
     }
 
-    return query_params;
+    return part_fields;
 }
 
 bool library_part::write_new_to_db(QString which_table, QSqlDatabase which_database)
 {
-    QList<QString> query_params = get_query_params(which_table);
+    QList<QString> query_params = get_query_params(which_table, which_database);
 
     QString query_text;
     QTextStream insert_query_strm(&query_text);
@@ -162,7 +165,7 @@ bool library_part::write_new_to_db(QString which_table, QSqlDatabase which_datab
 
 bool library_part::edit_existing_in_db(QString which_table, QSqlDatabase which_database)
 {
-    QList<QString> query_params = get_query_params(which_table);
+    QList<QString> query_params = get_query_params(which_table, which_database);
 
     QString query_text;
     QTextStream update_query_strm(&query_text);

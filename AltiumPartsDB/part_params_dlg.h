@@ -60,8 +60,6 @@ signals:
 
 private slots:
 
-    void on_btn_manufacturers_clicked();
-
     void on_btn_part_properties_clicked();
 
     void on_cmb_symbol_lib_currentIndexChanged(int index);
@@ -91,8 +89,6 @@ private:
     QFileInfoList schlibs, pcblibs;
 
     QString schlib_path, pcblib_path;
-
-    int check_number_of_mfgs();
 };
 
 #endif // PART_PARAMS_DLG_H

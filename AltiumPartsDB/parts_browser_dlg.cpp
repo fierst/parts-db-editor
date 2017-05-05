@@ -173,6 +173,13 @@ void parts_browser_dlg::process_edited_part(library_part &part, QString which_ta
 
 void parts_browser_dlg::on_btn_new_part_clicked()
 {
+    // If there's no database, don't proceed
+    if(!parts_db)
+    {
+        QMessageBox::warning(this, "Database Error", "Not connected to database, check connection settings", QMessageBox::Ok);
+        return;
+    }
+
     part_params_dlg ppdlg;
     ppdlg.setModal(true);
     ppdlg.setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
@@ -204,6 +211,13 @@ void parts_browser_dlg::refresh_table_query()
 
 void parts_browser_dlg::on_btn_edit_part_clicked()
 {
+    // If there's no database, don't proceed
+    if(!parts_db)
+    {
+        QMessageBox::warning(this, "Database Error", "Not connected to database, check connection settings", QMessageBox::Ok);
+        return;
+    }
+
     // Don't try to edit a part if there's none selected
     if(ui->tbl_parts->selectionModel()->selectedRows().count() == 0)
     {
@@ -223,6 +237,20 @@ void parts_browser_dlg::on_btn_edit_part_clicked()
 
 void parts_browser_dlg::on_btn_copy_part_clicked()
 {
+    // If there's no database, don't proceed
+    if(!parts_db)
+    {
+        QMessageBox::warning(this, "Database Error", "Not connected to database, check connection settings", QMessageBox::Ok);
+        return;
+    }
+
+    // Don't try to copy a part if there's none selected
+    if(ui->tbl_parts->selectionModel()->selectedRows().count() == 0)
+    {
+        QMessageBox::warning(this, "Error", "No part selected!", QMessageBox::Ok);
+        return;
+    }
+
     library_part current_part(parts_query_model.record(ui->tbl_parts->currentIndex().row()));
     current_part.remove_parameter("part_number");
     part_params_dlg ppdlg(current_part);
@@ -233,3 +261,4 @@ void parts_browser_dlg::on_btn_copy_part_clicked()
     connect(&ppdlg, &part_params_dlg::created_part, this, &parts_browser_dlg::process_new_part);
     ppdlg.exec();
 }
+

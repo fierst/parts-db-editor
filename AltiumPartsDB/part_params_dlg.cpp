@@ -72,26 +72,6 @@ void part_params_dlg::set_paths(QString sch_path, QString pcb_path)
     this->update_combo_boxes();
 }
 
-void part_params_dlg::on_btn_manufacturers_clicked()
-{
-    // TODO: Status indicator showing whether or not this has been done/validated yet
-    if(current_part == nullptr)
-    {
-        mfg_list_dlg mfgs_dlg;
-        mfgs_dlg.setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-        connect(&mfgs_dlg, &mfg_list_dlg::manufacturer_list_populated, this, &part_params_dlg::params_updated);
-        mfgs_dlg.exec();
-    }
-    else
-    {
-        mfg_list_dlg mfgs_dlg(*current_part);
-        mfgs_dlg.setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-        connect(&mfgs_dlg, &mfg_list_dlg::manufacturer_list_populated, this, &part_params_dlg::params_updated);
-        mfgs_dlg.exec();
-    }
-
-}
-
 void part_params_dlg::on_btn_part_properties_clicked()
 {
     // TODO: Status indicator showing whether or not this has been done/validated yet
@@ -338,32 +318,8 @@ void part_params_dlg::on_cmb_footprint_lib_currentIndexChanged(int index)
     }
 }
 
-int part_params_dlg::check_number_of_mfgs()
-{
-    int mfg_count = 0;
-
-    for(int i = 0; i < MAXIMUM_MFGS; i++)
-    {
-        QString mfg_string = QString("mfg_%1").arg(i+1);
-        if(!this->current_part->parameter_value(mfg_string).isEmpty())
-        {
-            mfg_count++;
-        }
-    }
-
-    return mfg_count;
-}
-
 void part_params_dlg::on_btn_ok_clicked()
 {
-    // Verify that the user really wants to save a part with no manufacturers
-    if(check_number_of_mfgs() < 1)
-    {
-        QMessageBox::StandardButton override_mfgs;
-        override_mfgs = QMessageBox::warning(this, "Manufacturer Info", "No manufacturers entered. This is generally discouraged. Continue?", QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
-        if(override_mfgs != QMessageBox::Yes)   return;
-    }
-
     QString footprint_path = QString("%1/%2").arg(pcblib_path, ui->cmb_footprint_lib->currentText());
     QString symbol_path = QString("%1/%2").arg(schlib_path, ui->cmb_symbol_lib->currentText());
     QString footprint = ui->cmb_footprint->currentText();
