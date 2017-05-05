@@ -68,8 +68,7 @@ HEADERS  += \
     electromechanical_dlg.h \
     diode_dlg.h \
     capacitor_dlg.h \
-    connector_dlg.h \
-    db_defines.h
+    connector_dlg.h
 
 FORMS    += \
     manufacturer_dlg.ui \

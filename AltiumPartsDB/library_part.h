@@ -7,8 +7,6 @@
 #include <QtSql>
 #include <map>
 
-#include "db_defines.h"
-
 enum part_types {
     CAPACITOR = 0,
     CONNECTOR,
@@ -76,7 +74,8 @@ private:
     std::map<QString, QString> part_parameters;
 
     // Get a list of the relevant query params (where a value actually exists)
-    QList<QString> get_query_params(QString which_table);
+    QStringList get_query_params(QString which_table, QSqlDatabase which_database);
+
 };
 
 #endif // LIBRARY_PART_H

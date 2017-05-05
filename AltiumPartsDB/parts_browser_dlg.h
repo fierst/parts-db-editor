@@ -11,7 +11,6 @@
 #include <memory>
 
 #include "library_part.h"
-#include "db_defines.h"
 
 namespace Ui {
 class parts_browser_dlg;

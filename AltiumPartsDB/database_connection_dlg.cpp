@@ -77,10 +77,10 @@ bool database_connection_dlg::validate_library_locations()
 bool database_connection_dlg::test_connection_settings(const QString &db_string)
 {\
     QSqlDatabase temp_db = QSqlDatabase::addDatabase(QString("QODBC"), QString("test_db%1").arg(1));
-    temp_db.setDatabaseName("altium_parts");
+    temp_db.setDatabaseName("parts");
     temp_db.setHostName(db_string);
     temp_db.setPort(3306);
-    if(!temp_db.open("efierst", "testpass"))
+    if(!temp_db.open("parts_db_editor", ""))
     {
         return false;
     }

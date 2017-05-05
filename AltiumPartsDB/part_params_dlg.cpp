@@ -34,18 +34,16 @@ part_params_dlg::part_params_dlg(library_part & existing_part) : ui(new Ui::part
     if(!path_to_footprint_lib.isEmpty())
     {
         QFileInfo fplib(path_to_footprint_lib);
-        ui->cmb_footprint_lib->setCurrentText(fplib.fileName());
+        ui->cmb_footprint_lib->setCurrentIndex(ui->cmb_footprint_lib->findText(fplib.fileName()));
     }
 
     if(!path_to_symbol_lib.isEmpty())
     {
         QFileInfo symlib(path_to_symbol_lib);
-        ui->cmb_symbol_lib->setCurrentText(symlib.fileName());
+        ui->cmb_symbol_lib->setCurrentIndex(ui->cmb_symbol_lib->findText(symlib.fileName()));
     }
 
     ui->txt_description->setText(current_part->parameter_value("description"));
-    ui->cmb_footprint->setCurrentText(current_part->parameter_value("footprint_ref"));
-    ui->cmb_symbol->setCurrentText(current_part->parameter_value("library_ref"));
 
 }
 
@@ -275,6 +273,9 @@ void part_params_dlg::update_combo_boxes()
     }
 
     ui->cmb_part_type->addItems(parts_db->tables());
+
+    ui->cmb_footprint->setCurrentText(this->current_part->parameter_value("footprint_ref"));
+    ui->cmb_symbol->setCurrentText(this->current_part->parameter_value("library_ref"));
 
 }
 
