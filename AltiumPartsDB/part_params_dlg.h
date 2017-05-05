@@ -80,6 +80,9 @@ private:
     // Add the updated params to the map
     void params_updated(const std::map<QString, QString> & );
 
+    // Given the base path and the path to a library, get the relative path
+    QString get_relative_path(QString path_to_library);
+
     std::shared_ptr<QSqlDatabase> parts_db;
 
     std::shared_ptr<library_part> current_part;

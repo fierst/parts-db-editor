@@ -200,6 +200,11 @@ void part_params_dlg::on_btn_part_properties_clicked()
     }
 }
 
+QString part_params_dlg::get_relative_path(QString path_to_library)
+{
+
+}
+
 void part_params_dlg::update_combo_boxes()
 {
     QDir schlib_location(this->schlib_path);
@@ -240,15 +245,16 @@ void part_params_dlg::update_combo_boxes()
     path_to_footprint_lib = current_part->parameter_value("footprint_path");
     path_to_symbol_lib = current_part->parameter_value("library_path");
 
-    if(!path_to_footprint_lib.isEmpty())
+
+    if(!path_to_footprint_lib.isEmpty() && pcblib_location.cdUp())
     {
-        QFileInfo fplib(path_to_footprint_lib);
+        QFileInfo fplib(pcblib_location.absolutePath() + "/" + path_to_footprint_lib);
         ui->cmb_footprint_lib->setCurrentIndex(ui->cmb_footprint_lib->findText(fplib.fileName()));
     }
 
-    if(!path_to_symbol_lib.isEmpty())
+    if(!path_to_symbol_lib.isEmpty() && schlib_location.cdUp())
     {
-        QFileInfo symlib(path_to_symbol_lib);
+        QFileInfo symlib(schlib_location.absolutePath() + "/" + path_to_symbol_lib);
         ui->cmb_symbol_lib->setCurrentIndex(ui->cmb_symbol_lib->findText(symlib.fileName()));
     }
 
@@ -320,8 +326,8 @@ void part_params_dlg::on_cmb_footprint_lib_currentIndexChanged(int index)
 void part_params_dlg::on_btn_ok_clicked()
 {
 
-    QString footprint_path = QString("%1/%2").arg(pcblib_path, ui->cmb_footprint_lib->currentText());
-    QString symbol_path = QString("%1/%2").arg(schlib_path, ui->cmb_symbol_lib->currentText());
+    QString footprint_path = QString("%1/%2").arg(QDir(pcblib_path).dirName(), ui->cmb_footprint_lib->currentText());
+    QString symbol_path = QString("%1/%2").arg(QDir(schlib_path).dirName(), ui->cmb_symbol_lib->currentText());
     QString footprint = ui->cmb_footprint->currentText();
     QString symbol = ui->cmb_symbol->currentText();
 

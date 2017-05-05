@@ -44,6 +44,8 @@ private slots:
 
     void on_btn_test_db_connection_clicked();
 
+    void on_btn_browse_library_clicked();
+
 private:
     Ui::database_connection_dlg *ui;
 
