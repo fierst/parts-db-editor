@@ -1,8 +1,6 @@
 #include "part_params_dlg.h"
 #include "ui_part_params_dlg.h"
 
-#include "mfg_list_dlg.h"
-
 part_params_dlg::part_params_dlg(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::part_params_dlg),
@@ -27,25 +25,7 @@ part_params_dlg::part_params_dlg(library_part & existing_part) : ui(new Ui::part
     // Disable the part-type combobox because they shouldn't be able to change it for an existing part
     ui->cmb_part_type->setEnabled(false);
 
-    QString path_to_footprint_lib, path_to_symbol_lib;
-    path_to_footprint_lib = current_part->parameter_value("footprint_path");
-    path_to_symbol_lib = current_part->parameter_value("library_path");
-
-    if(!path_to_footprint_lib.isEmpty())
-    {
-        QFileInfo fplib(path_to_footprint_lib);
-        ui->cmb_footprint_lib->setCurrentText(fplib.fileName());
-    }
-
-    if(!path_to_symbol_lib.isEmpty())
-    {
-        QFileInfo symlib(path_to_symbol_lib);
-        ui->cmb_symbol_lib->setCurrentText(symlib.fileName());
-    }
-
     ui->txt_description->setText(current_part->parameter_value("description"));
-    ui->cmb_footprint->setCurrentText(current_part->parameter_value("footprint_ref"));
-    ui->cmb_symbol->setCurrentText(current_part->parameter_value("library_ref"));
 
 }
 
@@ -256,6 +236,25 @@ void part_params_dlg::update_combo_boxes()
 
     ui->cmb_part_type->addItems(parts_db->tables());
 
+    QString path_to_footprint_lib, path_to_symbol_lib;
+    path_to_footprint_lib = current_part->parameter_value("footprint_path");
+    path_to_symbol_lib = current_part->parameter_value("library_path");
+
+    if(!path_to_footprint_lib.isEmpty())
+    {
+        QFileInfo fplib(path_to_footprint_lib);
+        ui->cmb_footprint_lib->setCurrentIndex(ui->cmb_footprint_lib->findText(fplib.fileName()));
+    }
+
+    if(!path_to_symbol_lib.isEmpty())
+    {
+        QFileInfo symlib(path_to_symbol_lib);
+        ui->cmb_symbol_lib->setCurrentIndex(ui->cmb_symbol_lib->findText(symlib.fileName()));
+    }
+
+    ui->cmb_footprint->setCurrentText(this->current_part->parameter_value("footprint_ref"));
+    ui->cmb_symbol->setCurrentText(this->current_part->parameter_value("library_ref"));
+
 }
 
 void part_params_dlg::params_updated(const std::map<QString, QString>& new_params)
@@ -320,6 +319,7 @@ void part_params_dlg::on_cmb_footprint_lib_currentIndexChanged(int index)
 
 void part_params_dlg::on_btn_ok_clicked()
 {
+
     QString footprint_path = QString("%1/%2").arg(pcblib_path, ui->cmb_footprint_lib->currentText());
     QString symbol_path = QString("%1/%2").arg(schlib_path, ui->cmb_symbol_lib->currentText());
     QString footprint = ui->cmb_footprint->currentText();

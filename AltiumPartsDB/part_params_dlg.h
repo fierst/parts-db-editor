@@ -89,6 +89,7 @@ private:
     QFileInfoList schlibs, pcblibs;
 
     QString schlib_path, pcblib_path;
+
 };
 
 #endif // PART_PARAMS_DLG_H

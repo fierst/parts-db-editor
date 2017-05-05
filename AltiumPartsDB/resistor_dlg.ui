@@ -128,19 +128,6 @@
     <string>Power</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_watts">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>130</y>
-     <width>47</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>W</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="lbl_ohms">
    <property name="geometry">
     <rect>
