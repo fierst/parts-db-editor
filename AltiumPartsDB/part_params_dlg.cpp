@@ -37,6 +37,40 @@ part_params_dlg::~part_params_dlg()
 void part_params_dlg::set_current_table(int tbl_index)
 {
     ui->cmb_part_type->setCurrentIndex(tbl_index);
+
+    // Update the footprint and schematic symbol combo boxes
+    QDir schlib_location(this->schlib_path);
+    QDir pcblib_location(this->pcblib_path);
+
+    QString path_to_footprint_lib, path_to_symbol_lib;
+    path_to_footprint_lib = current_part->parameter_value("footprint_path");
+    path_to_symbol_lib = current_part->parameter_value("library_path");
+
+
+    if(!path_to_footprint_lib.isEmpty() && pcblib_location.cdUp())
+    {
+        QFileInfo fplib(pcblib_location.absolutePath() + "/" + path_to_footprint_lib);
+        ui->cmb_footprint_lib->setCurrentIndex(ui->cmb_footprint_lib->findText(fplib.fileName()));
+    }
+    else
+    {
+        // Automatically select the expected footprint library based on the current part type
+        ui->cmb_footprint_lib->setCurrentText(QString("%1.PcbLib").arg(ui->cmb_part_type->currentText()));
+    }
+
+    if(!path_to_symbol_lib.isEmpty() && schlib_location.cdUp())
+    {
+        QFileInfo symlib(schlib_location.absolutePath() + "/" + path_to_symbol_lib);
+        ui->cmb_symbol_lib->setCurrentIndex(ui->cmb_symbol_lib->findText(symlib.fileName()));
+    }
+    else
+    {
+        // Automatically select the expected symbol library based on the current part type
+        ui->cmb_symbol_lib->setCurrentText(QString("%1.SchLib").arg(ui->cmb_part_type->currentText()));
+    }
+
+    ui->cmb_footprint->setCurrentText(this->current_part->parameter_value("footprint_ref"));
+    ui->cmb_symbol->setCurrentText(this->current_part->parameter_value("library_ref"));
 }
 
 void part_params_dlg::assign_db(const std::shared_ptr<QSqlDatabase>& db_ptr)
@@ -200,11 +234,6 @@ void part_params_dlg::on_btn_part_properties_clicked()
     }
 }
 
-QString part_params_dlg::get_relative_path(QString path_to_library)
-{
-
-}
-
 void part_params_dlg::update_combo_boxes()
 {
     QDir schlib_location(this->schlib_path);
@@ -240,27 +269,6 @@ void part_params_dlg::update_combo_boxes()
     }
 
     ui->cmb_part_type->addItems(parts_db->tables());
-
-    QString path_to_footprint_lib, path_to_symbol_lib;
-    path_to_footprint_lib = current_part->parameter_value("footprint_path");
-    path_to_symbol_lib = current_part->parameter_value("library_path");
-
-
-    if(!path_to_footprint_lib.isEmpty() && pcblib_location.cdUp())
-    {
-        QFileInfo fplib(pcblib_location.absolutePath() + "/" + path_to_footprint_lib);
-        ui->cmb_footprint_lib->setCurrentIndex(ui->cmb_footprint_lib->findText(fplib.fileName()));
-    }
-
-    if(!path_to_symbol_lib.isEmpty() && schlib_location.cdUp())
-    {
-        QFileInfo symlib(schlib_location.absolutePath() + "/" + path_to_symbol_lib);
-        ui->cmb_symbol_lib->setCurrentIndex(ui->cmb_symbol_lib->findText(symlib.fileName()));
-    }
-
-    ui->cmb_footprint->setCurrentText(this->current_part->parameter_value("footprint_ref"));
-    ui->cmb_symbol->setCurrentText(this->current_part->parameter_value("library_ref"));
-
 }
 
 void part_params_dlg::params_updated(const std::map<QString, QString>& new_params)
@@ -404,6 +412,5 @@ void part_params_dlg::on_btn_cancel_clicked()
 
 void part_params_dlg::on_cmb_part_type_currentIndexChanged(int index)
 {
-    // TODO: This should probably do something?
-    Q_UNUSED(index)
+    set_current_table(index);
 }
