@@ -38,6 +38,10 @@ void ic_dlg::serialize_params()
         {
             current_part->edit_parameter(QString("operating_temperature"), operating_temperature);
         }
+        else
+        {
+            current_part->add_parameter(QString("operating_temperature"), operating_temperature);
+        }
     }
 
     emit(params_set(params));

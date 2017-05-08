@@ -50,21 +50,45 @@ void resistor_dlg::serialize_params()
         {
             current_part->edit_parameter(QString("resistance"), resistance);
         }
+        else
+        {
+            current_part->add_parameter(QString("resistance"), resistance);
+        }
+
         if(current_part->parameter_exists(QString("tolerance")))
         {
             current_part->edit_parameter(QString("tolerance"), tolerance);
         }
+        else
+        {
+            current_part->add_parameter(QString("tolerance"), tolerance);
+        }
+
         if(current_part->parameter_exists(QString("power")))
         {
             current_part->edit_parameter(QString("power"), power);
         }
+        else
+        {
+            current_part->add_parameter(QString("power"), power);
+        }
+
         if(current_part->parameter_exists(QString("operating_temperature")))
         {
             current_part->edit_parameter(QString("operating_temperature"), operating_temperature);
         }
+        else
+        {
+            current_part->add_parameter(QString("operating_temperature"), operating_temperature);
+        }
+
         if(current_part->parameter_exists(QString("temperature_coefficient")))
         {
             current_part->edit_parameter(QString("temperature_coefficient"), temperature_coefficient);
+        }
+        else
+        {
+            current_part->add_parameter(QString("temperature_coefficient"), temperature_coefficient);
         }
     }
 

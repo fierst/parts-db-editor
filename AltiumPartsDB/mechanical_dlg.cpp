@@ -38,6 +38,10 @@ void mechanical_dlg::serialize_params()
         {
             current_part->edit_parameter(QString("mechanical_type"), mechanical_type);
         }
+        else
+        {
+            current_part->add_parameter(QString("mechanical_type"), mechanical_type);
+        }
     }
 
     emit(params_set(params));

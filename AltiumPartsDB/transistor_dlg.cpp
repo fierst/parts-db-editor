@@ -71,50 +71,110 @@ void transistor_dlg::serialize_params()
         {
             current_part->edit_parameter(QString("transistor_type"), transistor_type);
         }
+        else
+        {
+            current_part->add_parameter(QString("transistor_type"), transistor_type);
+        }
+
         if(current_part->parameter_exists(QString("power_max")))
         {
             current_part->edit_parameter(QString("power_max"), power_max);
         }
+        else
+        {
+            current_part->add_parameter(QString("power_max"), power_max);
+        }
+
         if(current_part->parameter_exists(QString("operating_temperature")))
         {
             current_part->edit_parameter(QString("operating_temperature"), operating_temperature);
         }
+        else
+        {
+            current_part->add_parameter(QString("operating_temperature"), operating_temperature);
+        }
+
         if(current_part->parameter_exists(QString("current_collector")))
         {
             current_part->edit_parameter(QString("current_collector"), current_collector);
         }
+        else
+        {
+            current_part->add_parameter(QString("current_collector"), current_collector);
+        }
+
         if(current_part->parameter_exists(QString("vce_breakdown")))
         {
             current_part->edit_parameter(QString("vce_breakdown"), vce_breakdown);
         }
+        else
+        {
+            current_part->add_parameter(QString("vce_breakdown"), vce_breakdown);
+        }
+
         if(current_part->parameter_exists(QString("vce_saturation")))
         {
             current_part->edit_parameter(QString("vce_saturation"), vce_saturation);
         }
+        else
+        {
+            current_part->add_parameter(QString("vce_saturation"), vce_saturation);
+        }
+
         if(current_part->parameter_exists(QString("dc_current_gain")))
         {
             current_part->edit_parameter(QString("dc_current_gain"), dc_current_gain);
         }
+        else
+        {
+            current_part->add_parameter(QString("dc_current_gain"), dc_current_gain);
+        }
+
         if(current_part->parameter_exists(QString("current_drain")))
         {
             current_part->edit_parameter(QString("current_drain"), current_drain);
         }
+        else
+        {
+            current_part->add_parameter(QString("current_drain"), current_drain);
+        }
+
         if(current_part->parameter_exists(QString("vdss")))
         {
             current_part->edit_parameter(QString("vdss"), vdss);
         }
+        else
+        {
+            current_part->add_parameter(QString("vdss"), vdss);
+        }
+
         if(current_part->parameter_exists(QString("drive_voltage")))
         {
             current_part->edit_parameter(QString("drive_voltage"), drive_voltage);
         }
+        else
+        {
+            current_part->add_parameter(QString("drive_voltage"), drive_voltage);
+        }
+
         if(current_part->parameter_exists(QString("vgs")))
         {
             current_part->edit_parameter(QString("vgs"), vgs);
         }
+        else
+        {
+            current_part->add_parameter(QString("vgs"), vgs);
+        }
+
         if(current_part->parameter_exists(QString("rds_on")))
         {
             current_part->edit_parameter(QString("rds_on"), rds_on);
         }
+        else
+        {
+            current_part->add_parameter(QString("rds_on"), rds_on);
+        }
+
     }
 
     emit(params_set(params));

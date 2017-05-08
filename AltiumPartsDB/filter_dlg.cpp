@@ -62,38 +62,83 @@ void filter_dlg::serialize_params()
         {
             current_part->edit_parameter(QString("filter_type"), filter_type);
         }
+        else
+        {
+            current_part->add_parameter(QString("filter_type"), filter_type);
+        }
+
         if(current_part->parameter_exists(QString("impedance")))
         {
             current_part->edit_parameter(QString("impedance"), impedance);
         }
+        else
+        {
+            current_part->add_parameter(QString("impedance"), impedance);
+        }
+
         if(current_part->parameter_exists(QString("inductance")))
         {
             current_part->edit_parameter(QString("inductance"), inductance);
         }
+        else
+        {
+            current_part->add_parameter(QString("inductance"), inductance);
+        }
+
         if(current_part->parameter_exists(QString("bandwidth")))
         {
             current_part->edit_parameter(QString("bandwidth"), bandwidth);
         }
+        else
+        {
+            current_part->add_parameter(QString("bandwidth"), bandwidth);
+        }
+
         if(current_part->parameter_exists(QString("frequency")))
         {
             current_part->edit_parameter(QString("frequency"), frequency);
         }
+        else
+        {
+            current_part->add_parameter(QString("frequency"), frequency);
+        }
+
         if(current_part->parameter_exists(QString("resistance")))
         {
             current_part->edit_parameter(QString("resistance"), resistance);
         }
+        else
+        {
+            current_part->add_parameter(QString("resistance"), resistance);
+        }
+
         if(current_part->parameter_exists(QString("voltage_rating")))
         {
             current_part->edit_parameter(QString("voltage_rating"), voltage_rating);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_rating"), voltage_rating);
+        }
+
         if(current_part->parameter_exists(QString("current_rating")))
         {
             current_part->edit_parameter(QString("current_rating"), current_rating);
         }
+        else
+        {
+            current_part->add_parameter(QString("current_rating"), current_rating);
+        }
+
         if(current_part->parameter_exists(QString("operating_temperature")))
         {
             current_part->edit_parameter(QString("operating_temperature"), operating_temperature);
         }
+        else
+        {
+            current_part->add_parameter(QString("operating_temperature"), operating_temperature);
+        }
+
     }
 }
 

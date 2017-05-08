@@ -52,27 +52,51 @@ void connector_dlg::serialize_params()
 
         if(current_part->parameter_exists(QString("number_of_positions")))
         {
-          current_part->edit_parameter(QString("number_of_positions"), num_pos);
+            current_part->edit_parameter(QString("number_of_positions"), num_pos);
+        }
+        else
+        {
+            current_part->add_parameter(QString("number_of_positions"), num_pos);
         }
         if(current_part->parameter_exists(QString("number_of_rows")))
         {
-          current_part->edit_parameter(QString("number_of_rows"), num_rows);
+            current_part->edit_parameter(QString("number_of_rows"), num_rows);
+        }
+        else
+        {
+            current_part->add_parameter(QString("number_of_rows"), num_rows);
         }
         if(current_part->parameter_exists(QString("contact_finish")))
         {
-          current_part->edit_parameter(QString("contact_finish"), contact_finish);
+            current_part->edit_parameter(QString("contact_finish"), contact_finish);
+        }
+        else
+        {
+            current_part->add_parameter(QString("contact_finish"), contact_finish);
         }
         if(current_part->parameter_exists(QString("current")))
         {
-          current_part->edit_parameter(QString("current"), current);
+            current_part->edit_parameter(QString("current"), current);
+        }
+        else
+        {
+            current_part->add_parameter(QString("current"), current);
         }
         if(current_part->parameter_exists(QString("voltage")))
         {
-          current_part->edit_parameter(QString("voltage"), voltage);
+            current_part->edit_parameter(QString("voltage"), voltage);
+        }
+        else
+        {
+            current_part->add_parameter(QString("voltage"), voltage);
         }
         if(current_part->parameter_exists(QString("wire_gauge)")))
         {
-          current_part->edit_parameter(QString("wire_gauge"), wire_gauge);
+            current_part->edit_parameter(QString("wire_gauge"), wire_gauge);
+        }
+        else
+        {
+            current_part->add_parameter(QString("wire_gauge"), wire_gauge);
         }
 
     }

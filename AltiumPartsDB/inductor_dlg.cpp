@@ -53,26 +53,56 @@ void inductor_dlg::serialize_params()
         {
             current_part->edit_parameter(QString("inductance"), inductance);
         }
+        else
+        {
+            current_part->add_parameter(QString("inductance"), inductance);
+        }
+
         if(current_part->parameter_exists(QString("tolerance")))
         {
             current_part->edit_parameter(QString("tolerance"), tolerance);
         }
+        else
+        {
+            current_part->add_parameter(QString("tolerance"), tolerance);
+        }
+
         if(current_part->parameter_exists(QString("core_material")))
         {
             current_part->edit_parameter(QString("core_material"), core_material);
         }
+        else
+        {
+            current_part->add_parameter(QString("core_material"), core_material);
+        }
+
         if(current_part->parameter_exists(QString("current_rating")))
         {
             current_part->edit_parameter(QString("current_rating"), current_rating);
         }
+        else
+        {
+            current_part->add_parameter(QString("current_rating"), current_rating);
+        }
+
         if(current_part->parameter_exists(QString("resistance")))
         {
             current_part->edit_parameter(QString("resistance"), resistance);
         }
+        else
+        {
+            current_part->add_parameter(QString("resistance"), resistance);
+        }
+
         if(current_part->parameter_exists(QString("operating_temperature")))
         {
             current_part->edit_parameter(QString("operating_temperature"), operating_temperature);
         }
+        else
+        {
+            current_part->add_parameter(QString("operating_temperature"), operating_temperature);
+        }
+
     }
 
     emit(params_set(params));

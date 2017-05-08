@@ -56,30 +56,65 @@ void oscillator_dlg::serialize_params()
         {
             current_part->edit_parameter(QString("frequency"), frequency);
         }
+        else
+        {
+            current_part->add_parameter(QString("frequency"), frequency);
+        }
+
         if(current_part->parameter_exists(QString("tolerance")))
         {
             current_part->edit_parameter(QString("tolerance"), tolerance);
         }
+        else
+        {
+            current_part->add_parameter(QString("tolerance"), tolerance);
+        }
+
         if(current_part->parameter_exists(QString("load_capacitance")))
         {
             current_part->edit_parameter(QString("load_capacitance"), load_capacitance);
         }
+        else
+        {
+            current_part->add_parameter(QString("load_capacitance"), load_capacitance);
+        }
+
         if(current_part->parameter_exists(QString("equivalent_series_resistance")))
         {
             current_part->edit_parameter(QString("equivalent_series_resistance"), equivalent_series_resistance);
         }
+        else
+        {
+            current_part->add_parameter(QString("equivalent_series_resistance"), equivalent_series_resistance);
+        }
+
         if(current_part->parameter_exists(QString("voltage")))
         {
             current_part->edit_parameter(QString("voltage"), voltage);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage"), voltage);
+        }
+
         if(current_part->parameter_exists(QString("current")))
         {
             current_part->edit_parameter(QString("current"), current);
         }
+        else
+        {
+            current_part->add_parameter(QString("current"), current);
+        }
+
         if(current_part->parameter_exists(QString("output_type")))
         {
             current_part->edit_parameter(QString("output_type"), output_type);
         }
+        else
+        {
+            current_part->add_parameter(QString("output_type"), output_type);
+        }
+
     }
 
     emit(params_set(params));

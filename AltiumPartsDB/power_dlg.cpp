@@ -68,45 +68,99 @@ void power_dlg::serialize_params()
         {
             current_part->edit_parameter(QString("type"), type);
         }
+        else
+        {
+            current_part->add_parameter(QString("type"), type);
+        }
+
         if(current_part->parameter_exists(QString("voltage_input_min")))
         {
             current_part->edit_parameter(QString("voltage_input_min"), voltage_input_min);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_input_min"), voltage_input_min);
+        }
+
         if(current_part->parameter_exists(QString("voltage_input_max")))
         {
             current_part->edit_parameter(QString("voltage_input_max"), voltage_input_max);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_input_max"), voltage_input_max);
+        }
+
         if(current_part->parameter_exists(QString("voltage_output_1")))
         {
             current_part->edit_parameter(QString("voltage_output_1"), voltage_output_1);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_output_1"), voltage_output_1);
+        }
+
         if(current_part->parameter_exists(QString("voltage_output_2")))
         {
             current_part->edit_parameter(QString("voltage_output_2"), voltage_output_2);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_output_2"), voltage_output_2);
+        }
+
         if(current_part->parameter_exists(QString("voltage_output_3")))
         {
             current_part->edit_parameter(QString("voltage_output_3"), voltage_output_3);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_output_3"), voltage_output_3);
+        }
+
         if(current_part->parameter_exists(QString("number_of_outputs")))
         {
             current_part->edit_parameter(QString("number_of_outputs"), number_of_outputs);
         }
+        else
+        {
+            current_part->add_parameter(QString("number_of_outputs"), number_of_outputs);
+        }
+
         if(current_part->parameter_exists(QString("current_output")))
         {
             current_part->edit_parameter(QString("current_output"), current_output);
         }
+        else
+        {
+            current_part->add_parameter(QString("current_output"), current_output);
+        }
+
         if(current_part->parameter_exists(QString("voltage_isolation")))
         {
             current_part->edit_parameter(QString("voltage_isolation"), voltage_isolation);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_isolation"), voltage_isolation);
+        }
+
         if(current_part->parameter_exists(QString("power")))
         {
             current_part->edit_parameter(QString("power"), power);
         }
+        else
+        {
+            current_part->add_parameter(QString("power"), power);
+        }
+
         if(current_part->parameter_exists(QString("efficiency")))
         {
             current_part->edit_parameter(QString("efficiency"), efficiency);
+        }
+        else
+        {
+            current_part->add_parameter(QString("efficiency"), efficiency);
         }
 
     }

@@ -63,37 +63,81 @@ void transformer_dlg::serialize_params()
         {
             current_part->edit_parameter(QString("transformer_type"), transformer_type);
         }
+        else
+        {
+            current_part->add_parameter(QString("transformer_type"), transformer_type);
+        }
+
         if(current_part->parameter_exists(QString("voltage_primary")))
         {
             current_part->edit_parameter(QString("voltage_primary"), voltage_primary);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_primary"), voltage_primary);
+        }
+
         if(current_part->parameter_exists(QString("voltage_secondary")))
         {
             current_part->edit_parameter(QString("voltage_secondary"), voltage_secondary);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_secondary"), voltage_secondary);
+        }
+
         if(current_part->parameter_exists(QString("center_tap")))
         {
             current_part->edit_parameter(QString("center_tap"), center_tap);
         }
+        else
+        {
+            current_part->add_parameter(QString("center_tap"), center_tap);
+        }
+
         if(current_part->parameter_exists(QString("power_max")))
         {
             current_part->edit_parameter(QString("power_max"), power_max);
         }
+        else
+        {
+            current_part->add_parameter(QString("power_max"), power_max);
+        }
+
         if(current_part->parameter_exists(QString("current_output")))
         {
             current_part->edit_parameter(QString("current_output"), current_output);
         }
+        else
+        {
+            current_part->add_parameter(QString("current_output"), current_output);
+        }
+
         if(current_part->parameter_exists(QString("voltage_isolation")))
         {
             current_part->edit_parameter(QString("voltage_isolation"), voltage_isolation);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_isolation"), voltage_isolation);
+        }
+
         if(current_part->parameter_exists(QString("inductance")))
         {
             current_part->edit_parameter(QString("inductance"), inductance);
         }
+        else
+        {
+            current_part->add_parameter(QString("inductance"), inductance);
+        }
+
         if(current_part->parameter_exists(QString("turns_ratio")))
         {
             current_part->edit_parameter(QString("turns_ratio"), turns_ratio);
+        }
+        else
+        {
+            current_part->add_parameter(QString("turns_ratio"), turns_ratio);
         }
     }
 

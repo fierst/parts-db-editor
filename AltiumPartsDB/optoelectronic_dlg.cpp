@@ -53,26 +53,56 @@ void optoelectronic_dlg::serialize_params()
         {
             current_part->edit_parameter(QString("color"), color);
         }
+        else
+        {
+            current_part->add_parameter(QString("color"), color);
+        }
+
         if(current_part->parameter_exists(QString("wavelength")))
         {
             current_part->edit_parameter(QString("wavelength"), wavelength);
         }
+        else
+        {
+            current_part->add_parameter(QString("wavelength"), wavelength);
+        }
+
         if(current_part->parameter_exists(QString("power_dissipation")))
         {
             current_part->edit_parameter(QString("power_dissipation"), power_dissipation);
         }
+        else
+        {
+            current_part->add_parameter(QString("power_dissipation"), power_dissipation);
+        }
+
         if(current_part->parameter_exists(QString("voltage_forward")))
         {
             current_part->edit_parameter(QString("voltage_forward"), voltage_forward);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_forward"), voltage_forward);
+        }
+
         if(current_part->parameter_exists(QString("current_rating")))
         {
             current_part->edit_parameter(QString("current_rating"), current_rating);
         }
+        else
+        {
+            current_part->add_parameter(QString("current_rating"), current_rating);
+        }
+
         if(current_part->parameter_exists(QString("millicandela_rating")))
         {
             current_part->edit_parameter(QString("millicandela_rating"), millicandela_rating);
         }
+        else
+        {
+            current_part->add_parameter(QString("millicandela_rating"), millicandela_rating);
+        }
+
     }
 
     emit(params_set(params));

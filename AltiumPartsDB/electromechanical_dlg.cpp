@@ -77,58 +77,128 @@ void electromechanical_dlg::serialize_params()
         {
             current_part->edit_parameter(QString("type"), type);
         }
+        else
+        {
+            current_part->add_parameter(QString("type"), type);
+        }
+
         if(current_part->parameter_exists(QString("current_rating")))
         {
             current_part->edit_parameter(QString("current_rating"), current_rating);
         }
+        else
+        {
+            current_part->add_parameter(QString("current_rating"), current_rating);
+        }
+
         if(current_part->parameter_exists(QString("voltage_rating")))
         {
             current_part->edit_parameter(QString("voltage_rating"), voltage_rating);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_rating"), voltage_rating);
+        }
+
         if(current_part->parameter_exists(QString("on_state_resistance")))
         {
             current_part->edit_parameter(QString("on_state_resistance"), on_state_resistance);
         }
+        else
+        {
+            current_part->add_parameter(QString("on_state_resistance"), on_state_resistance);
+        }
+
         if(current_part->parameter_exists(QString("voltage_input")))
         {
             current_part->edit_parameter(QString("voltage_input"), voltage_input);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_input"), voltage_input);
+        }
+
         if(current_part->parameter_exists(QString("voltage_load")))
         {
             current_part->edit_parameter(QString("voltage_load"), voltage_load);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_load"), voltage_load);
+        }
+
         if(current_part->parameter_exists(QString("circuit")))
         {
             current_part->edit_parameter(QString("circuit"), circuit);
         }
+        else
+        {
+            current_part->add_parameter(QString("circuit"), circuit);
+        }
+
         if(current_part->parameter_exists(QString("coil_type")))
         {
             current_part->edit_parameter(QString("coil_type"), coil_type);
         }
+        else
+        {
+            current_part->add_parameter(QString("coil_type"), coil_type);
+        }
+
         if(current_part->parameter_exists(QString("coil_current")))
         {
             current_part->edit_parameter(QString("coil_current"), coil_current);
         }
+        else
+        {
+            current_part->add_parameter(QString("coil_current"), coil_current);
+        }
+
         if(current_part->parameter_exists(QString("coil_voltage")))
         {
             current_part->edit_parameter(QString("coil_voltage"), coil_voltage);
         }
+        else
+        {
+            current_part->add_parameter(QString("coil_voltage"), coil_voltage);
+        }
+
         if(current_part->parameter_exists(QString("voltage_on")))
         {
             current_part->edit_parameter(QString("voltage_on"), voltage_on);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_on"), voltage_on);
+        }
+
         if(current_part->parameter_exists(QString("voltage_off")))
         {
             current_part->edit_parameter(QString("voltage_off"), voltage_off);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_off"), voltage_off);
+        }
+
         if(current_part->parameter_exists(QString("operating_time")))
         {
             current_part->edit_parameter(QString("operating_time"), operating_time);
         }
+        else
+        {
+            current_part->add_parameter(QString("operating_time"), operating_time);
+        }
+
         if(current_part->parameter_exists(QString("release_time")))
         {
             current_part->edit_parameter(QString("release_time"), release_time);
         }
+        else
+        {
+            current_part->add_parameter(QString("release_time"), release_time);
+        }
+
     }
 
     emit(params_set(params));

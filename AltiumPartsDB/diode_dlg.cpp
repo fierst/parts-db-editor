@@ -60,40 +60,85 @@ void diode_dlg::serialize_params()
 
         if(current_part->parameter_exists(QString("type")))
         {
-          current_part->edit_parameter(QString("type"), type);
+            current_part->edit_parameter(QString("type"), type);
         }
+        else
+        {
+            current_part->add_parameter(QString("type"), type);
+        }
+
         if(current_part->parameter_exists(QString("current_reverse")))
         {
-          current_part->edit_parameter(QString("current_reverse"), current_reverse);
+            current_part->edit_parameter(QString("current_reverse"), current_reverse);
         }
+        else
+        {
+            current_part->add_parameter(QString("current_reverse"), current_reverse);
+        }
+
         if(current_part->parameter_exists(QString("voltage_forward")))
         {
-          current_part->edit_parameter(QString("voltage_forward"), voltage_forward);
+            current_part->edit_parameter(QString("voltage_forward"), voltage_forward);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_forward"), voltage_forward);
+        }
+
         if(current_part->parameter_exists(QString("voltage_zener")))
         {
-          current_part->edit_parameter(QString("voltage_zener"), voltage_zener);
+            current_part->edit_parameter(QString("voltage_zener"), voltage_zener);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_zener"), voltage_zener);
+        }
+
         if(current_part->parameter_exists(QString("tolerance")))
         {
-          current_part->edit_parameter(QString("tolerance"), tolerance);
+            current_part->edit_parameter(QString("tolerance"), tolerance);
         }
+        else
+        {
+            current_part->add_parameter(QString("tolerance"), tolerance);
+        }
+
         if(current_part->parameter_exists(QString("power_max")))
         {
-          current_part->edit_parameter(QString("power_max"), power_max);
+            current_part->edit_parameter(QString("power_max"), power_max);
         }
+        else
+        {
+            current_part->add_parameter(QString("power_max"), power_max);
+        }
+
         if(current_part->parameter_exists(QString("impedance_max")))
         {
-          current_part->edit_parameter(QString("impedance_max"), impedance_max);
+            current_part->edit_parameter(QString("impedance_max"), impedance_max);
         }
+        else
+        {
+            current_part->add_parameter(QString("impedance_max"), impedance_max);
+        }
+
         if(current_part->parameter_exists(QString("capacitance")))
         {
-          current_part->edit_parameter(QString("capacitance"), capacitance);
+            current_part->edit_parameter(QString("capacitance"), capacitance);
         }
+        else
+        {
+            current_part->add_parameter(QString("capacitance"), capacitance);
+        }
+
         if(current_part->parameter_exists(QString("reverse_recovery_time")))
         {
-          current_part->edit_parameter(QString("reverse_recovery_time"), reverse_recovery_time);
+            current_part->edit_parameter(QString("reverse_recovery_time"), reverse_recovery_time);
         }
+        else
+        {
+            current_part->add_parameter(QString("reverse_recovery_time"), reverse_recovery_time);
+        }
+
     }
 
     emit(params_set(params));

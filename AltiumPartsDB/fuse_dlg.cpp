@@ -53,26 +53,56 @@ void fuse_dlg::serialize_params()
         {
             current_part->edit_parameter(QString("fuse_type"), fuse_type);
         }
+        else
+        {
+            current_part->add_parameter(QString("fuse_type"), fuse_type);
+        }
+
         if(current_part->parameter_exists(QString("current_rating")))
         {
             current_part->edit_parameter(QString("current_rating"), current_rating);
         }
+        else
+        {
+            current_part->add_parameter(QString("current_rating"), current_rating);
+        }
+
         if(current_part->parameter_exists(QString("response_time")))
         {
             current_part->edit_parameter(QString("response_time"), response_time);
         }
+        else
+        {
+            current_part->add_parameter(QString("response_time"), response_time);
+        }
+
         if(current_part->parameter_exists(QString("voltage_rating_ac")))
         {
             current_part->edit_parameter(QString("voltage_rating_ac"), voltage_rating_ac);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_rating_ac"), voltage_rating_ac);
+        }
+
         if(current_part->parameter_exists(QString("voltage_rating_dc")))
         {
             current_part->edit_parameter(QString("voltage_rating_dc"), voltage_rating_dc);
         }
+        else
+        {
+            current_part->add_parameter(QString("voltage_rating_dc"), voltage_rating_dc);
+        }
+
         if(current_part->parameter_exists(QString("breaking_capacity")))
         {
             current_part->edit_parameter(QString("breaking_capacity"), breaking_capacity);
         }
+        else
+        {
+            current_part->add_parameter(QString("breaking_capacity"), breaking_capacity);
+        }
+
 
     }
 

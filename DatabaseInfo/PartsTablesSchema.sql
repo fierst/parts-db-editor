@@ -196,7 +196,7 @@ CREATE TABLE IF NOT EXISTS Power (
 CREATE TABLE IF NOT EXISTS Resistor (
   part_number VARCHAR(12) NOT NULL PRIMARY KEY DEFAULT '',
   description VARCHAR(255),
-  resistance VARCHAR(32) NOT NULL,
+  resistance VARCHAR(32),
   tolerance VARCHAR(32),
   power VARCHAR(32),
   operating_temperature VARCHAR(32),
