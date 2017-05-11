@@ -70,7 +70,6 @@ private:
     // Holds the parameters to be inserted into the parts database
     // Key is the name of the parameters
     // Value is the value to store in the parameters
-    // TODO: differentiate between base properties, part properties, and manufacturer properties so we can
     std::map<QString, QString> part_parameters;
 
     // Get a list of the relevant query params (where a value actually exists)

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>312</width>
-    <height>305</height>
+    <height>351</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,8 +39,8 @@
   <widget class="QLineEdit" name="box_rev_current">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>80</y>
+     <x>180</x>
+     <y>130</y>
      <width>113</width>
      <height>21</height>
     </rect>
@@ -49,8 +49,8 @@
   <widget class="QLabel" name="lbl_rev_current">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>60</y>
+     <x>180</x>
+     <y>110</y>
      <width>111</width>
      <height>16</height>
     </rect>
@@ -62,8 +62,8 @@
   <widget class="QLineEdit" name="box_voltage_fwd">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>130</y>
+     <x>180</x>
+     <y>80</y>
      <width>113</width>
      <height>21</height>
     </rect>
@@ -72,8 +72,8 @@
   <widget class="QLabel" name="lbl_fwd_voltage">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>110</y>
+     <x>180</x>
+     <y>60</y>
      <width>111</width>
      <height>16</height>
     </rect>
@@ -86,7 +86,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>180</y>
+     <y>230</y>
      <width>113</width>
      <height>21</height>
     </rect>
@@ -96,7 +96,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>160</y>
+     <y>210</y>
      <width>111</width>
      <height>16</height>
     </rect>
@@ -109,7 +109,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>230</y>
+     <y>280</y>
      <width>113</width>
      <height>21</height>
     </rect>
@@ -119,7 +119,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>210</y>
+     <y>260</y>
      <width>111</width>
      <height>16</height>
     </rect>
@@ -157,8 +157,8 @@
   <widget class="QLineEdit" name="box_impedance">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>80</y>
+     <x>10</x>
+     <y>180</y>
      <width>113</width>
      <height>21</height>
     </rect>
@@ -167,8 +167,8 @@
   <widget class="QLabel" name="lbl_impedance">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>60</y>
+     <x>10</x>
+     <y>160</y>
      <width>111</width>
      <height>16</height>
     </rect>
@@ -181,7 +181,7 @@
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>130</y>
+     <y>180</y>
      <width>113</width>
      <height>21</height>
     </rect>
@@ -191,7 +191,7 @@
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>110</y>
+     <y>160</y>
      <width>111</width>
      <height>16</height>
     </rect>
@@ -204,7 +204,7 @@
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>180</y>
+     <y>230</y>
      <width>113</width>
      <height>21</height>
     </rect>
@@ -214,7 +214,7 @@
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>160</y>
+     <y>210</y>
      <width>151</width>
      <height>16</height>
     </rect>
@@ -227,7 +227,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>270</y>
+     <y>320</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -240,13 +240,62 @@
    <property name="geometry">
     <rect>
      <x>230</x>
-     <y>270</y>
+     <y>320</y>
      <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>OK</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="box_voltage_rev">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>80</y>
+     <width>113</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_rev_voltage">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>110</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Voltage - Reverse</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_current_avg">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>110</y>
+     <width>121</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Current - Avg. Rectified</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="box_current_avg">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>113</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

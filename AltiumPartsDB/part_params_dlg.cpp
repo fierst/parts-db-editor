@@ -26,7 +26,6 @@ part_params_dlg::part_params_dlg(library_part & existing_part) : ui(new Ui::part
     ui->cmb_part_type->setEnabled(false);
 
     ui->txt_description->setText(current_part->parameter_value("description"));
-
 }
 
 part_params_dlg::~part_params_dlg()

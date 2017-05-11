@@ -132,7 +132,7 @@ bool library_part::write_new_to_db(QString which_table, QSqlDatabase which_datab
         insert_query.bindValue(QString(":%1").arg(query_params.at(p)), parameter_value(query_params.at(p)));
     }
 
-    insert_query.exec();
+    return insert_query.exec();
     // Build the query to write the part to the database
 }
 
@@ -167,6 +167,6 @@ bool library_part::edit_existing_in_db(QString which_table, QSqlDatabase which_d
 
     update_query.bindValue(":part_number", parameter_value("part_number"));
 
-    update_query.exec();
+    return update_query.exec();
 
 }
